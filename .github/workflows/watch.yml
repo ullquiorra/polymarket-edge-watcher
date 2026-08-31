@@ -1,0 +1,54 @@
+# Runs the Polymarket edge watcher in GitHub's cloud, about 4 times a day.
+# Each run watches for about 5h45m, then saves the new rows of watch_data.csv
+# back into this repository, so the next run continues where this one stopped.
+#
+# On a PUBLIC repository these runner minutes are unlimited and free.
+
+name: edge-watcher
+
+on:
+  # start a new watch shift at 00:00, 06:00, 12:00 and 18:00 UTC
+  schedule:
+    - cron: "0 0,6,12,18 * * *"
+  # adds a green "Run workflow" button on the Actions page (for the test run)
+  workflow_dispatch:
+    inputs:
+      minutes:
+        description: "Minutes to watch this run (10 = quick test)"
+        default: "345"
+
+permissions:
+  contents: write          # lets the job save the updated CSV back into the repo
+
+concurrency:
+  group: watcher
+  cancel-in-progress: false # if two runs ever overlap, the newer one politely waits
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      TZ: Etc/GMT-1       # makes the CSV's local_time column match your clock (UTC+1, no summer time)
+      WATCHER_POLL: "4"   # check prices every 4 seconds, same as on your PC
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Watch for one shift
+        run: |
+          MINUTES="${{ github.event.inputs.minutes || '345' }}"
+          echo "watching for $MINUTES minutes"
+          WATCHER_MAX_SECONDS=$(( MINUTES * 60 )) python watcher.py
+
+      - name: Save the new data into the repo
+        run: |
+          git config user.name "edge-watcher-bot"
+          git config user.email "actions@noreply.github.com"
+          git add watch_data.csv watch_log.txt
+          git commit -m "watch data: $(date -u '+%Y-%m-%d %H:%M') UTC" || echo "nothing new to save"
+          git push origin HEAD:"$GITHUB_REF_NAME" \
+            || (git pull --rebase origin "$GITHUB_REF_NAME" && git push origin HEAD:"$GITHUB_REF_NAME")
