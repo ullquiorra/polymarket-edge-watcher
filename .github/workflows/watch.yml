@@ -7,9 +7,11 @@
 name: edge-watcher
 
 on:
-  # start a new watch shift at 00:00, 06:00, 12:00 and 18:00 UTC
+  # start a new watch shift at 00:07, 06:07, 12:07 and 18:07 UTC
+  # (7 past the hour: GitHub's runners are most congested exactly on the
+  #  hour and can delay or silently skip runs scheduled at :00)
   schedule:
-    - cron: "0 0,6,12,18 * * *"
+    - cron: "7 0,6,12,18 * * *"
   # adds a green "Run workflow" button on the Actions page (for the test run)
   workflow_dispatch:
     inputs:
