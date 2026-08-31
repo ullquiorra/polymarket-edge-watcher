@@ -1,0 +1,41 @@
+# Watchdog: makes sure an edge-watcher shift is (almost) always running,
+# even when GitHub delays or drops scheduled runs (which it documents it
+# does under load: "some scheduled jobs may be dropped").
+#
+# Every 20 minutes it asks GitHub's API one question:
+#   "is an edge-watcher run active or queued right now?"
+# If yes -> do nothing. If no -> start a fresh full shift (345 min).
+#
+# GitHub gives the watchdog 72 chances a day to fire; it only needs one
+# success per ~6-hour window to keep coverage continuous. It also
+# automatically replaces a shift if one ever fails mid-day.
+
+name: keepalive
+
+on:
+  schedule:
+    - cron: "*/20 * * * *"
+  workflow_dispatch: # allows a manual check from the Actions page too
+
+permissions:
+  actions: write # needed to read run status and to start the watcher
+
+jobs:
+  ensure-watching:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Start edge-watcher if nothing is running
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ACTIVE=$(gh api "repos/${{ github.repository }}/actions/workflows/watch.yml/runs?per_page=15" \
+            --jq '[.workflow_runs[] | select(.status == "in_progress" or .status == "queued" or .status == "waiting")] | length')
+          echo "edge-watcher runs active or queued: $ACTIVE"
+          if [ "$ACTIVE" -eq 0 ]; then
+            echo "nothing running - starting a fresh full shift"
+            gh api -X POST "repos/${{ github.repository }}/actions/workflows/watch.yml/dispatches" \
+              -f ref=main -f "minutes=345"
+          else
+            echo "edge-watcher already running or queued - nothing to do"
+          fi
