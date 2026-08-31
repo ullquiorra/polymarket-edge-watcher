@@ -41,7 +41,8 @@ QUICK TEST (10 minutes)
 7. Refresh in a minute: a run called "edge-watcher" appears with a
      yellow dot (working). After ~12 min it turns green (done).
 8. Go back to the repo home page: watch_data.csv should now show a
-     newer update time, and watch_log.txt should exist. That is the
+     newer update time, and watch_log.txt and watch_depth.csv should
+     exist. That is the
      cloud watcher talking to Polymarket. It now runs 4 shifts a day
      by itself - nothing more to do.
 

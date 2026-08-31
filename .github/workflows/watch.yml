@@ -1,6 +1,7 @@
 # Runs the Polymarket edge watcher in GitHub's cloud, about 4 times a day.
 # Each run watches for about 5h45m, then saves the new rows of watch_data.csv
-# back into this repository, so the next run continues where this one stopped.
+# (every snapshot) and watch_depth.csv (order-book depth) back into this
+# repository, so the next run continues where this one stopped.
 #
 # On a PUBLIC repository these runner minutes are unlimited and free.
 
@@ -50,7 +51,7 @@ jobs:
         run: |
           git config user.name "edge-watcher-bot"
           git config user.email "actions@noreply.github.com"
-          git add watch_data.csv watch_log.txt
+          git add watch_data.csv watch_depth.csv watch_log.txt
           git commit -m "watch data: $(date -u '+%Y-%m-%d %H:%M') UTC" || echo "nothing new to save"
           git push origin HEAD:"$GITHUB_REF_NAME" \
             || (git pull --rebase origin "$GITHUB_REF_NAME" && git push origin HEAD:"$GITHUB_REF_NAME")

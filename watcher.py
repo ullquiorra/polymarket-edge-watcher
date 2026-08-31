@@ -40,10 +40,12 @@ HEARTBEAT_SECONDS = float(os.environ.get("WATCHER_HEARTBEAT", "300"))
 SUMMARY_SECONDS = float(os.environ.get("WATCHER_SUMMARY", "1800"))
 MAX_SECONDS = float(os.environ.get("WATCHER_MAX_SECONDS", "0"))  # 0 = run until stopped
 HTTP_TIMEOUT = 15
+DEPTH_LEVELS = int(os.environ.get("WATCHER_DEPTH_LEVELS", "3"))  # order-book levels to log per side
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TXT_PATH = os.path.join(HERE, "watch_log.txt")
 CSV_PATH = os.path.join(HERE, "watch_data.csv")
+DEPTH_CSV_PATH = os.path.join(HERE, "watch_depth.csv")
 
 GAMMA_MARKET_URL = "https://gamma-api.polymarket.com/markets?slug={slug}"
 CLOB_BOOK_URL = "https://clob.polymarket.com/book?token_id={token_id}"
@@ -55,6 +57,14 @@ CSV_FIELDS = [
     "down_bid_cents", "down_ask_cents", "down_ask_shares",
     "total_ask_cents", "edge_cents",
 ]
+
+# Companion file: the top DEPTH_LEVELS ask levels for each side, so a later
+# analysis can simulate the exact average price of filling a given order size.
+# watch_data.csv above is left exactly as-is so existing tools keep working.
+DEPTH_FIELDS = ["local_time", "utc_time", "window_slug", "window_label"]
+for _side in ("up", "down"):
+    for _i in range(1, DEPTH_LEVELS + 1):
+        DEPTH_FIELDS += [f"{_side}_l{_i}_c", f"{_side}_l{_i}_sh"]
 
 
 # ---------------------------------------------------------------- helpers
@@ -126,15 +136,29 @@ def window_label(market, slug):
     return question.split(" - ", 1)[1] if " - " in question else question
 
 
+def top_ask_levels(asks, n):
+    """Aggregate ask sizes at each price, sort cheapest-first, return the top
+    n as [(price_cents, shares), ...]. These are the levels a buy order would
+    eat through, so they let a later analysis compute the true average fill
+    price for any order size."""
+    agg = {}
+    for price, size in asks:
+        agg[price] = agg.get(price, 0.0) + size
+    levels = sorted(agg.items())[:n]  # cheapest first
+    return [(round(p * 100, 1), round(s, 1)) for p, s in levels]
+
+
 def read_book(token_id):
-    """Return (best_bid, best_ask, shares_offered_at_best_ask) as floats, or Nones."""
+    """Return (best_bid, best_ask, shares_at_best_ask, ask_levels) as floats
+    (ask_levels is a list of (price_cents, shares), cheapest first), or Nones."""
     book = http_json(CLOB_BOOK_URL.format(token_id=token_id))
     bids = [(float(b["price"]), float(b["size"])) for b in (book.get("bids") or [])]
     asks = [(float(a["price"]), float(a["size"])) for a in (book.get("asks") or [])]
     best_bid = max(p for p, _ in bids) if bids else None
     best_ask = min(p for p, _ in asks) if asks else None
     ask_shares = sum(s for p, s in asks if p == best_ask) if asks else None
-    return best_bid, best_ask, ask_shares
+    ask_levels = top_ask_levels(asks, DEPTH_LEVELS) if asks else []
+    return best_bid, best_ask, ask_shares, ask_levels
 
 
 def cents_or_blank(price):
@@ -145,6 +169,24 @@ def csv_append(row):
     is_new = not os.path.exists(CSV_PATH) or os.path.getsize(CSV_PATH) == 0
     with open(CSV_PATH, "a", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=CSV_FIELDS)
+        if is_new:
+            writer.writeheader()
+        writer.writerow(row)
+
+
+def depth_csv_append(base, up_levels, down_levels):
+    """Write one row of order-book depth to watch_depth.csv. `base` carries the
+    shared keys (times, slug, label); up_levels/down_levels are lists of
+    (price_cents, shares). Missing levels are left blank."""
+    row = dict(base)
+    for side, levels in (("up", up_levels), ("down", down_levels)):
+        for i in range(1, DEPTH_LEVELS + 1):
+            price, shares = (levels[i - 1] if i - 1 < len(levels) else ("", ""))
+            row[f"{side}_l{i}_c"] = price
+            row[f"{side}_l{i}_sh"] = shares
+    is_new = not os.path.exists(DEPTH_CSV_PATH) or os.path.getsize(DEPTH_CSV_PATH) == 0
+    with open(DEPTH_CSV_PATH, "a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=DEPTH_FIELDS)
         if is_new:
             writer.writeheader()
         writer.writerow(row)
@@ -213,14 +255,14 @@ def run():
                     label = window_label(market, current_slug)
                     books = {}
                     for name, token_id in market["_outcomes"]:
-                        bid, ask, ask_shares = read_book(token_id)
-                        books[name] = (bid, ask, ask_shares)
+                        bid, ask, ask_shares, ask_levels = read_book(token_id)
+                        books[name] = (bid, ask, ask_shares, ask_levels)
 
                     # Polymarket names these "Up" and "Down"; fall back to whatever exists
                     up_name = "Up" if "Up" in books else next(iter(books))
                     down_name = "Down" if "Down" in books else list(books)[-1]
-                    up_bid, up_ask, up_shares = books[up_name]
-                    down_bid, down_ask, down_shares = books[down_name]
+                    up_bid, up_ask, up_shares, up_levels = books[up_name]
+                    down_bid, down_ask, down_shares, down_levels = books[down_name]
 
                     if up_ask is None or down_ask is None:
                         missing = up_name if up_ask is None else down_name
@@ -231,9 +273,11 @@ def run():
                         stats["obs"] += 1
                         stats["edge_cents_total"] += edge_c
 
+                        snap_local = dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                        snap_utc = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
                         csv_append({
-                            "local_time": dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                            "utc_time": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
+                            "local_time": snap_local,
+                            "utc_time": snap_utc,
                             "window_slug": current_slug,
                             "window_label": label,
                             "up_bid_cents": cents_or_blank(up_bid),
@@ -245,6 +289,11 @@ def run():
                             "total_ask_cents": total_c,
                             "edge_cents": edge_c,
                         })
+                        depth_csv_append(
+                            {"local_time": snap_local, "utc_time": snap_utc,
+                             "window_slug": current_slug, "window_label": label},
+                            up_levels, down_levels,
+                        )
 
                         minutes_left = max(0, round((window_start + WINDOW_SECONDS - now) / 60))
                         if edge_c > 0:
