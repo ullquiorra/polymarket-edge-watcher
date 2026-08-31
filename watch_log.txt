@@ -1,0 +1,16 @@
+=== Polymarket BTC 15-minute edge watcher ===
+started 2026-08-31 13:22:27 (local time)
+read-only: free public data, no account, no orders are ever placed
+polling every 4s; text log: watch_log.txt; every snapshot: watch_data.csv
+stop with Ctrl+C or by closing this window
+===
+--- 13:22:27 - now watching: August 31, 8:15AM-8:30AM ET (ends in 8 min) ---
+13:27:27 - August 31, 8:15AM-8:30AM ET - Up seen at 0.2c, Down seen at 99.9c -> would total 100.1c -> NO EDGE (still watching)
+--- 13:30:03 - now watching: August 31, 8:30AM-8:45AM ET (ends in 15 min) ---
+13:30:43 - August 31, 8:30AM-8:45AM ET - Up seen at 39c, Down seen at 60c -> would total 99c -> 1c EDGE (offered: 8 / 93 shares)
+13:32:27 == SUMMARY (104 snapshots, 2 windows) ==
+   moments with an edge: 1 of 104 (1.0%)
+   average gap (100c minus both-asks total): -0.92c across all snapshots
+   best edge: 1c at 13:30:43 (Up 39c + Down 60c = 99c)
+== end summary ==
+=== watcher stopped at 13:32:27 ===
