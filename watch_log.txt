@@ -1489,3 +1489,183 @@ stop with Ctrl+C or by closing this window
    best edge: 6c at 00:51:00 (Up 54c + Down 40c = 94c)
 == end summary ==
 === watcher stopped at 05:20:48 ===
+=== Polymarket BTC 15-minute edge watcher ===
+started 2026-09-04 12:07:03 (local time)
+read-only: free public data, no account, no orders are ever placed
+polling every 4s; text log: watch_log.txt; every snapshot: watch_data.csv
+stop with Ctrl+C or by closing this window
+===
+--- 12:07:03 - now watching: September 4, 7:00AM-7:15AM ET (ends in 8 min) ---
+12:12:04 - September 4, 7:00AM-7:15AM ET - Up seen at 23c, Down seen at 78c -> would total 101c -> NO EDGE (still watching)
+--- 12:15:03 - now watching: September 4, 7:15AM-7:30AM ET (ends in 15 min) ---
+12:17:04 - September 4, 7:15AM-7:30AM ET - Up seen at 51c, Down seen at 50c -> would total 101c -> NO EDGE (still watching)
+12:20:08 - September 4, 7:15AM-7:30AM ET - Up seen at 47c, Down seen at 52c -> would total 99c -> 1c EDGE (offered: 20 / 9 shares)
+12:21:04 - September 4, 7:15AM-7:30AM ET - Up seen at 42c, Down seen at 56c -> would total 98c -> 2c EDGE (offered: 45 / 370 shares)
+12:26:08 - September 4, 7:15AM-7:30AM ET - Up seen at 85c, Down seen at 16c -> would total 101c -> NO EDGE (still watching)
+--- 12:30:03 - now watching: September 4, 7:30AM-7:45AM ET (ends in 15 min) ---
+12:30:20 - September 4, 7:30AM-7:45AM ET - Up seen at 25c, Down seen at 74c -> would total 99c -> 1c EDGE (offered: 159 / 908 shares)
+12:30:32 - September 4, 7:30AM-7:45AM ET - Up seen at 23c, Down seen at 76c -> would total 99c -> 1c EDGE (offered: 20 / 588 shares)
+12:35:36 - September 4, 7:30AM-7:45AM ET - Up seen at 14c, Down seen at 87c -> would total 101c -> NO EDGE (still watching)
+12:37:04 == SUMMARY (400 snapshots, 3 windows) ==
+   moments with an edge: 4 of 400 (1.0%)
+   average gap (100c minus both-asks total): -1.01c across all snapshots
+   best edge: 2c at 12:21:04 (Up 42c + Down 56c = 98c)
+== end summary ==
+12:40:36 - September 4, 7:30AM-7:45AM ET - Up seen at 7c, Down seen at 94c -> would total 101c -> NO EDGE (still watching)
+--- 12:45:03 - now watching: September 4, 7:45AM-8:00AM ET (ends in 15 min) ---
+12:45:36 - September 4, 7:45AM-8:00AM ET - Up seen at 57c, Down seen at 44c -> would total 101c -> NO EDGE (still watching)
+12:50:36 - September 4, 7:45AM-8:00AM ET - Up seen at 70c, Down seen at 32c -> would total 102c -> NO EDGE (still watching)
+12:52:00 - September 4, 7:45AM-8:00AM ET - Up seen at 80c, Down seen at 17c -> would total 97c -> 3c EDGE (offered: 13 / 19 shares)
+12:52:32 - September 4, 7:45AM-8:00AM ET - Up seen at 77c, Down seen at 22c -> would total 99c -> 1c EDGE (offered: 135 / 69 shares)
+12:57:32 - September 4, 7:45AM-8:00AM ET - Up seen at 47c, Down seen at 54c -> would total 101c -> NO EDGE (still watching)
+--- 13:00:03 - now watching: September 4, 8:00AM-8:15AM ET (ends in 15 min) ---
+13:00:08 - September 4, 8:00AM-8:15AM ET - Up seen at 45c, Down seen at 54c -> would total 99c -> 1c EDGE (offered: 10 / 156 shares)
+13:05:00 - September 4, 8:00AM-8:15AM ET - Up seen at 38c, Down seen at 61c -> would total 99c -> 1c EDGE (offered: 5 / 195 shares)
+13:07:04 == SUMMARY (793 snapshots, 5 windows) ==
+   moments with an edge: 8 of 793 (1.0%)
+   average gap (100c minus both-asks total): -1.06c across all snapshots
+   best edge: 3c at 12:52:00 (Up 80c + Down 17c = 97c)
+== end summary ==
+13:07:24 - September 4, 8:00AM-8:15AM ET - Up seen at 24c, Down seen at 75c -> would total 99c -> 1c EDGE (offered: 5 / 65 shares)
+13:10:04 - September 4, 8:00AM-8:15AM ET - Up seen at 45c, Down seen at 52c -> would total 97c -> 3c EDGE (offered: 10 / 7 shares)
+13:10:52 - September 4, 8:00AM-8:15AM ET - Up seen at 17c, Down seen at 82c -> would total 99c -> 1c EDGE (offered: 15 / 50 shares)
+13:13:44 - September 4, 8:00AM-8:15AM ET - Up seen at 2c, Down seen at 97c -> would total 99c -> 1c EDGE (offered: 106 / 110 shares)
+13:14:24 - September 4, 8:00AM-8:15AM ET - Up seen at 23c, Down seen at 76c -> would total 99c -> 1c EDGE (offered: 5 / 80 shares)
+--- 13:15:04 - now watching: September 4, 8:15AM-8:30AM ET (ends in 15 min) ---
+13:15:32 - September 4, 8:15AM-8:30AM ET - Up seen at 41c, Down seen at 58c -> would total 99c -> 1c EDGE (offered: 15 / 157 shares)
+13:20:36 - September 4, 8:15AM-8:30AM ET - Up seen at 28c, Down seen at 73c -> would total 101c -> NO EDGE (still watching)
+13:25:40 - September 4, 8:15AM-8:30AM ET - Up seen at 44c, Down seen at 58c -> would total 102c -> NO EDGE (still watching)
+13:27:24 - September 4, 8:15AM-8:30AM ET - Up seen at 77c, Down seen at 21c -> would total 98c -> 2c EDGE (offered: 116 / 100 shares)
+13:27:56 - September 4, 8:15AM-8:30AM ET - Up seen at 58c, Down seen at 41c -> would total 99c -> 1c EDGE (offered: 10 / 968 shares)
+--- 13:30:04 - now watching: September 4, 8:30AM-8:45AM ET (ends in 15 min) ---
+13:33:00 - September 4, 8:30AM-8:45AM ET - Up seen at 6c, Down seen at 95c -> would total 101c -> NO EDGE (still watching)
+13:37:08 == SUMMARY (1231 snapshots, 7 windows) ==
+   moments with an edge: 16 of 1231 (1.3%)
+   average gap (100c minus both-asks total): -1.06c across all snapshots
+   best edge: 3c at 12:52:00 (Up 80c + Down 17c = 97c)
+== end summary ==
+13:38:04 - September 4, 8:30AM-8:45AM ET - Up seen at 2c, Down seen at 99c -> would total 101c -> NO EDGE (still watching)
+13:43:04 - September 4, 8:30AM-8:45AM ET - Up seen at 0.5c, Down seen at 99.7c -> would total 100.2c -> NO EDGE (still watching)
+--- 13:45:00 - now watching: September 4, 8:45AM-9:00AM ET (ends in 15 min) ---
+13:48:08 - September 4, 8:45AM-9:00AM ET - Up seen at 19c, Down seen at 82c -> would total 101c -> NO EDGE (still watching)
+13:53:04 - September 4, 8:45AM-9:00AM ET - Up seen at 24c, Down seen at 75c -> would total 99c -> 1c EDGE (offered: 20 / 165 shares)
+--- 14:00:00 - now watching: September 4, 9:00AM-9:15AM ET (ends in 15 min) ---
+14:00:00 - September 4, 9:00AM-9:15AM ET - Up seen at 54c, Down seen at 47c -> would total 101c -> NO EDGE (still watching)
+14:05:04 - September 4, 9:00AM-9:15AM ET - Up seen at 46c, Down seen at 55c -> would total 101c -> NO EDGE (still watching)
+14:07:08 == SUMMARY (1615 snapshots, 9 windows) ==
+   moments with an edge: 17 of 1615 (1.1%)
+   average gap (100c minus both-asks total): -1.03c across all snapshots
+   best edge: 3c at 12:52:00 (Up 80c + Down 17c = 97c)
+== end summary ==
+14:10:04 - September 4, 9:00AM-9:15AM ET - Up seen at 20c, Down seen at 81c -> would total 101c -> NO EDGE (still watching)
+--- 14:15:00 - now watching: September 4, 9:15AM-9:30AM ET (ends in 15 min) ---
+14:15:04 - September 4, 9:15AM-9:30AM ET - Up seen at 54c, Down seen at 47c -> would total 101c -> NO EDGE (still watching)
+14:19:32 - September 4, 9:15AM-9:30AM ET - Up seen at 72c, Down seen at 27c -> would total 99c -> 1c EDGE (offered: 5 / 432 shares)
+14:23:20 - September 4, 9:15AM-9:30AM ET - Up seen at 85c, Down seen at 14c -> would total 99c -> 1c EDGE (offered: 15 / 76 shares)
+14:28:20 - September 4, 9:15AM-9:30AM ET - Up seen at 86c, Down seen at 15c -> would total 101c -> NO EDGE (still watching)
+14:28:52 - September 4, 9:15AM-9:30AM ET - Up seen at 96c, Down seen at 3c -> would total 99c -> 1c EDGE (offered: 15 / 40 shares)
+14:29:16 - September 4, 9:15AM-9:30AM ET - Up seen at 99c, Down seen at 0.9c -> would total 99.9c -> 0.1c EDGE (offered: 96 / 100 shares)
+--- 14:30:00 - now watching: September 4, 9:30AM-9:45AM ET (ends in 15 min) ---
+14:34:16 - September 4, 9:30AM-9:45AM ET - Up seen at 49c, Down seen at 52c -> would total 101c -> NO EDGE (still watching)
+14:37:08 == SUMMARY (2037 snapshots, 11 windows) ==
+   moments with an edge: 21 of 2037 (1.0%)
+   average gap (100c minus both-asks total): -1.03c across all snapshots
+   best edge: 3c at 12:52:00 (Up 80c + Down 17c = 97c)
+== end summary ==
+14:39:16 - September 4, 9:30AM-9:45AM ET - Up seen at 54c, Down seen at 47c -> would total 101c -> NO EDGE (still watching)
+--- 14:45:00 - now watching: September 4, 9:45AM-10:00AM ET (ends in 15 min) ---
+14:45:00 - September 4, 9:45AM-10:00AM ET - Up seen at 51c, Down seen at 50c -> would total 101c -> NO EDGE (still watching)
+14:47:12 - September 4, 9:45AM-10:00AM ET - Up seen at 74c, Down seen at 25c -> would total 99c -> 1c EDGE (offered: 50 / 15 shares)
+14:52:12 - September 4, 9:45AM-10:00AM ET - Up seen at 79c, Down seen at 22c -> would total 101c -> NO EDGE (still watching)
+14:54:24 - September 4, 9:45AM-10:00AM ET - Up seen at 34c, Down seen at 64c -> would total 98c -> 2c EDGE (offered: 5 / 5 shares)
+14:58:28 - September 4, 9:45AM-10:00AM ET - Up seen at 73c, Down seen at 26c -> would total 99c -> 1c EDGE (offered: 113 / 152 shares)
+--- 15:00:00 - now watching: September 4, 10:00AM-10:15AM ET (ends in 15 min) ---
+15:02:04 - September 4, 10:00AM-10:15AM ET - Up seen at 71c, Down seen at 26c -> would total 97c -> 3c EDGE (offered: 3 / 50 shares)
+15:07:08 - September 4, 10:00AM-10:15AM ET - Up seen at 68c, Down seen at 33c -> would total 101c -> NO EDGE (still watching)
+15:07:08 == SUMMARY (2467 snapshots, 13 windows) ==
+   moments with an edge: 25 of 2467 (1.0%)
+   average gap (100c minus both-asks total): -1.04c across all snapshots
+   best edge: 3c at 12:52:00 (Up 80c + Down 17c = 97c)
+== end summary ==
+15:10:56 - September 4, 10:00AM-10:15AM ET - Up seen at 29c, Down seen at 70c -> would total 99c -> 1c EDGE (offered: 100 / 75 shares)
+15:11:44 - September 4, 10:00AM-10:15AM ET - Up seen at 27c, Down seen at 72c -> would total 99c -> 1c EDGE (offered: 12 / 85 shares)
+15:13:16 - September 4, 10:00AM-10:15AM ET - Up seen at 35c, Down seen at 63c -> would total 98c -> 2c EDGE (offered: 60 / 100 shares)
+--- 15:15:00 - now watching: September 4, 10:15AM-10:30AM ET (ends in 15 min) ---
+15:18:16 - September 4, 10:15AM-10:30AM ET - Up seen at 28c, Down seen at 73c -> would total 101c -> NO EDGE (still watching)
+15:22:56 - September 4, 10:15AM-10:30AM ET - Up seen at 18c, Down seen at 81c -> would total 99c -> 1c EDGE (offered: 18 / 58 shares)
+15:27:32 - September 4, 10:15AM-10:30AM ET - Up seen at 34c, Down seen at 64c -> would total 98c -> 2c EDGE (offered: 20 / 150 shares)
+15:27:56 - September 4, 10:15AM-10:30AM ET - Up seen at 26c, Down seen at 72c -> would total 98c -> 2c EDGE (offered: 70 / 18 shares)
+--- 15:30:00 - now watching: September 4, 10:30AM-10:45AM ET (ends in 15 min) ---
+15:32:56 - September 4, 10:30AM-10:45AM ET - Up seen at 47c, Down seen at 53c -> would total 100c -> NO EDGE (still watching)
+15:33:08 - September 4, 10:30AM-10:45AM ET - Up seen at 53c, Down seen at 45c -> would total 98c -> 2c EDGE (offered: 38 / 205 shares)
+15:37:08 == SUMMARY (2890 snapshots, 15 windows) ==
+   moments with an edge: 32 of 2890 (1.1%)
+   average gap (100c minus both-asks total): -1.03c across all snapshots
+   best edge: 3c at 12:52:00 (Up 80c + Down 17c = 97c)
+== end summary ==
+15:38:08 - September 4, 10:30AM-10:45AM ET - Up seen at 26c, Down seen at 75c -> would total 101c -> NO EDGE (still watching)
+--- 15:45:00 - now watching: September 4, 10:45AM-11:00AM ET (ends in 15 min) ---
+15:45:00 - September 4, 10:45AM-11:00AM ET - Up seen at 54c, Down seen at 47c -> would total 101c -> NO EDGE (still watching)
+15:50:04 - September 4, 10:45AM-11:00AM ET - Up seen at 11c, Down seen at 90c -> would total 101c -> NO EDGE (still watching)
+15:55:08 - September 4, 10:45AM-11:00AM ET - Up seen at 12c, Down seen at 89c -> would total 101c -> NO EDGE (still watching)
+15:55:48 - September 4, 10:45AM-11:00AM ET - Up seen at 27c, Down seen at 72c -> would total 99c -> 1c EDGE (offered: 6 / 1,189 shares)
+15:59:08 - September 4, 10:45AM-11:00AM ET - Up seen at 17c, Down seen at 81c -> would total 98c -> 2c EDGE (offered: 36 / 100 shares)
+--- 16:00:00 - now watching: September 4, 11:00AM-11:15AM ET (ends in 15 min) ---
+16:04:08 - September 4, 11:00AM-11:15AM ET - Up seen at 61c, Down seen at 40c -> would total 101c -> NO EDGE (still watching)
+16:07:08 == SUMMARY (3298 snapshots, 17 windows) ==
+   moments with an edge: 34 of 3298 (1.0%)
+   average gap (100c minus both-asks total): -1.04c across all snapshots
+   best edge: 3c at 12:52:00 (Up 80c + Down 17c = 97c)
+== end summary ==
+16:08:56 - September 4, 11:00AM-11:15AM ET - Up seen at 84c, Down seen at 14c -> would total 98c -> 2c EDGE (offered: 32 / 91 shares)
+--- 16:15:00 - now watching: September 4, 11:15AM-11:30AM ET (ends in 15 min) ---
+16:15:00 - September 4, 11:15AM-11:30AM ET - Up seen at 55c, Down seen at 46c -> would total 101c -> NO EDGE (still watching)
+16:20:04 - September 4, 11:15AM-11:30AM ET - Up seen at 70c, Down seen at 31c -> would total 101c -> NO EDGE (still watching)
+16:25:04 - September 4, 11:15AM-11:30AM ET - Up seen at 94c, Down seen at 7c -> would total 101c -> NO EDGE (still watching)
+--- 16:30:00 - now watching: September 4, 11:30AM-11:45AM ET (ends in 15 min) ---
+16:30:00 - September 4, 11:30AM-11:45AM ET - Up seen at 49c, Down seen at 50c -> would total 99c -> 1c EDGE (offered: 5 / 30 shares)
+16:35:01 - September 4, 11:30AM-11:45AM ET - Up seen at 36c, Down seen at 65c -> would total 101c -> NO EDGE (still watching)
+16:36:01 - September 4, 11:30AM-11:45AM ET - Up seen at 56c, Down seen at 42c -> would total 98c -> 2c EDGE (offered: 89 / 255 shares)
+16:37:09 == SUMMARY (3670 snapshots, 19 windows) ==
+   moments with an edge: 37 of 3670 (1.0%)
+   average gap (100c minus both-asks total): -1.03c across all snapshots
+   best edge: 3c at 12:52:00 (Up 80c + Down 17c = 97c)
+== end summary ==
+16:41:01 - September 4, 11:30AM-11:45AM ET - Up seen at 94c, Down seen at 7c -> would total 101c -> NO EDGE (still watching)
+--- 16:45:01 - now watching: September 4, 11:45AM-12:00PM ET (ends in 15 min) ---
+16:46:01 - September 4, 11:45AM-12:00PM ET - Up seen at 54c, Down seen at 47c -> would total 101c -> NO EDGE (still watching)
+16:51:01 - September 4, 11:45AM-12:00PM ET - Up seen at 31c, Down seen at 70c -> would total 101c -> NO EDGE (still watching)
+16:56:01 - September 4, 11:45AM-12:00PM ET - Up seen at 30c, Down seen at 71c -> would total 101c -> NO EDGE (still watching)
+--- 17:00:01 - now watching: September 4, 12:00PM-12:15PM ET (ends in 15 min) ---
+17:01:01 - September 4, 12:00PM-12:15PM ET - Up seen at 41c, Down seen at 60c -> would total 101c -> NO EDGE (still watching)
+17:06:05 - September 4, 12:00PM-12:15PM ET - Up seen at 64c, Down seen at 37c -> would total 101c -> NO EDGE (still watching)
+17:07:09 == SUMMARY (4074 snapshots, 21 windows) ==
+   moments with an edge: 37 of 4074 (0.9%)
+   average gap (100c minus both-asks total): -1.03c across all snapshots
+   best edge: 3c at 12:52:00 (Up 80c + Down 17c = 97c)
+== end summary ==
+17:11:05 - September 4, 12:00PM-12:15PM ET - Up seen at 82c, Down seen at 19c -> would total 101c -> NO EDGE (still watching)
+--- 17:15:01 - now watching: September 4, 12:15PM-12:30PM ET (ends in 15 min) ---
+17:16:05 - September 4, 12:15PM-12:30PM ET - Up seen at 41c, Down seen at 60c -> would total 101c -> NO EDGE (still watching)
+17:16:49 - September 4, 12:15PM-12:30PM ET - Up seen at 44c, Down seen at 55c -> would total 99c -> 1c EDGE (offered: 1 / 295 shares)
+17:21:53 - September 4, 12:15PM-12:30PM ET - Up seen at 72c, Down seen at 30c -> would total 102c -> NO EDGE (still watching)
+17:23:21 - September 4, 12:15PM-12:30PM ET - Up seen at 65c, Down seen at 34c -> would total 99c -> 1c EDGE (offered: 125 / 125 shares)
+--- 17:30:01 - now watching: September 4, 12:30PM-12:45PM ET (ends in 15 min) ---
+17:30:01 - September 4, 12:30PM-12:45PM ET - Up seen at 50c, Down seen at 51c -> would total 101c -> NO EDGE (still watching)
+17:35:05 - September 4, 12:30PM-12:45PM ET - Up seen at 92c, Down seen at 9c -> would total 101c -> NO EDGE (still watching)
+17:37:09 == SUMMARY (4473 snapshots, 23 windows) ==
+   moments with an edge: 39 of 4473 (0.9%)
+   average gap (100c minus both-asks total): -1.03c across all snapshots
+   best edge: 3c at 12:52:00 (Up 80c + Down 17c = 97c)
+== end summary ==
+17:40:05 - September 4, 12:30PM-12:45PM ET - Up seen at 97c, Down seen at 4c -> would total 101c -> NO EDGE (still watching)
+--- 17:45:01 - now watching: September 4, 12:45PM-1:00PM ET (ends in 15 min) ---
+17:45:05 - September 4, 12:45PM-1:00PM ET - Up seen at 50c, Down seen at 51c -> would total 101c -> NO EDGE (still watching)
+17:50:09 - September 4, 12:45PM-1:00PM ET - Up seen at 47c, Down seen at 54c -> would total 101c -> NO EDGE (still watching)
+17:51:37 - September 4, 12:45PM-1:00PM ET - Up seen at 49c, Down seen at 50c -> would total 99c -> 1c EDGE (offered: 7 / 140 shares)
+17:52:05 == SUMMARY (4638 snapshots, 24 windows) ==
+   moments with an edge: 40 of 4638 (0.9%)
+   average gap (100c minus both-asks total): -1.03c across all snapshots
+   best edge: 3c at 12:52:00 (Up 80c + Down 17c = 97c)
+== end summary ==
+=== watcher stopped at 17:52:05 ===
